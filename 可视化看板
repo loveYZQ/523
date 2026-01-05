@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>协作引力模型 - 数据大屏</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: sans-serif; background: #0b1e33; color: white; margin: 0; padding: 20px; }
+        .dashboard { max-width: 1200px; margin: 0 auto; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); }
+        h1 { color: #00d2ff; text-align: center; }
+        .stats { display: flex; justify-content: space-around; margin: 30px 0; }
+        .card { background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; text-align: center; border-bottom: 4px solid #00d2ff; min-width: 200px; }
+        .card h3 { margin: 0; font-size: 14px; opacity: 0.7; }
+        .card p { font-size: 32px; font-weight: bold; margin: 10px 0; color: #f39c12; }
+        .chart-box { height: 400px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+    <h1>开源社区协作引力实时监测 (React vs Vue)</h1>
+    
+    <div class="stats">
+        <div class="card"><h3>协作引力指数 (F)</h3><p id="f-score">49.52</p></div>
+        <div class="card"><h3>引力峰值</h3><p id="peak">56.42</p></div>
+        <div class="card"><h3>核心开发者重合率</h3><p id="overlap">7.08%</p></div>
+        <div class="card"><h3>预测趋势</h3><p id="trend" style="color: #2ecc71;">稳定增长</p></div>
+    </div>
+
+    <div class="chart-box">
+        <canvas id="gravityChart"></canvas>
+    </div>
+</div>
+
+<script>
+    const ctx = document.getElementById('gravityChart').getContext('2d');
+    const labels = ["2023-01", "2023-05", "2023-09", "2024-01", "2024-05", "2024-09", "2024-10"];
+    const data = [18.4, 35.4, 19.8, 23.5, 56.4, 43.8, 49.5];
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '协作引力强度 (Collaboration Gravity Force)',
+                data: data,
+                borderColor: '#00d2ff',
+                backgroundColor: 'rgba(0, 210, 255, 0.1)',
+                fill: true,
+                tension: 0.4,
+                borderWidth: 3,
+                pointRadius: 6,
+                pointBackgroundColor: '#f39c12'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { labels: { color: '#fff' } } },
+            scales: {
+                y: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#fff' } },
+                x: { grid: { display: false }, ticks: { color: '#fff' } }
+            }
+        }
+    });
+</script>
+</body>
+</html>
